@@ -17,7 +17,6 @@ export default function Home() {
   const fetchSearchResults = useCallback(() => {
     Axios.get(`https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&site=stackoverflow&intitle=${searchTerm}`)
       .then(response => {
-        console.log(response.data.items);
         if (response.data.items.length > 0) {
           setSearchResultsItems(response.data.items);
         } else {

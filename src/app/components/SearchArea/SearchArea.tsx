@@ -8,7 +8,7 @@ interface SearchAreaProps {
 
 const SearchArea: React.FC<SearchAreaProps> = ({ isWaiting, onChange }) => {
   return (
-    <Search autoFocus className={isWaiting ? 'waiting-input' : ''} onChange={onChange} labelText="Let's Go" />
+    <Search size="lg" autoFocus className={isWaiting ? 'waiting-input' : ''} onChange={onChange} labelText="Search Stack Overflow" />
   )
 }
 
