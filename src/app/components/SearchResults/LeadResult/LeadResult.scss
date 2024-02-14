@@ -15,3 +15,15 @@
 .tile-label {
   font-size: 0.8rem;
 }
+
+.lead-result-title {
+  font-size: 1.5rem;
+  color: var(--cds-link-primary);
+
+  .cds--tile--clickable:hover & {
+    color: var(--cds-link-primary-hover);
+  }
+  .cds--tile--clickable:visited & {
+    color: var(--cds-link-visited);
+  }
+}

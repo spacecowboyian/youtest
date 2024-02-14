@@ -1,5 +1,5 @@
 import { StackOverflowResult } from '@/app/types/StackOverflowResult';
-import { ListItem, UnorderedList } from "@carbon/react";
+import { Link, ListItem, UnorderedList } from "@carbon/react";
 import { decode } from 'html-entities';
 
 interface RelatedResultsListProps {
@@ -11,7 +11,7 @@ const RelatedResultsList: React.FC<RelatedResultsListProps> = ({ items }) => {
     <UnorderedList>
       {items ? items.map(item => (
         <ListItem key={item.question_id}>
-          <a href={item.link}>{decode(item.title)}</a>
+          <Link href={item.link}>{decode(item.title)}</Link>
         </ListItem>
       ))
         : null}

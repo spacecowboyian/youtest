@@ -23,7 +23,7 @@ const LeadResult: React.FC<LeadResultProps> = ({ countdown, item, ...props }) =>
       item.title !== "noresult" ?
         <ClickableTile key={key} id="lead-result" href={item.link} >
           <span className="tile-label">Top Result</span>
-          <h3>{decode(item.title)}</h3>
+          <h3 className="lead-result-title">{decode(item.title)}</h3>
           Tags: &nbsp;
           {item.tags ? item.tags.map(tag => (
             <Tag key={tag} className="some-class" type="cyan" title="tag">
