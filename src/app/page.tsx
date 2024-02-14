@@ -1,32 +1,20 @@
 'use client'
-import Axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
 import SearchResults from './components/SearchResults/SearchResults';
 import './page.scss';
+import useSearchResults from './services/useSearchResults';
 
 import { Content, Theme } from '@carbon/react';
 import SearchArea from './components/SearchArea/SearchArea';
 
-// TODO: Add the search term to the URL so that the user can navigate back to the search results
-
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResultsItems, setSearchResultsItems] = useState<any[]>([]);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+  const { searchResultsItems, fetchSearchResults } = useSearchResults(searchTerm);
   const [countdown, setCountdown] = useState(3);
-
-  const fetchSearchResults = useCallback(() => {
-    Axios.get(`https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&site=stackoverflow&intitle=${searchTerm}`)
-      .then(response => {
-        if (response.data.items.length > 0) {
-          setSearchResultsItems(response.data.items);
-        } else {
-          setSearchResultsItems([{ title: 'noresult' }]);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, [searchTerm]);
 
   useEffect(() => {
     setCountdown(3);
@@ -49,6 +37,7 @@ export default function Home() {
   const handleSearchChange = (event: { target: HTMLInputElement; type: "change"; }) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
+    router.push(`/?search=${newSearchTerm}`);
   }
 
   return (

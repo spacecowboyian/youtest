@@ -1,4 +1,5 @@
 import { Search } from "@carbon/react";
+import { decode } from 'html-entities';
 import { useEffect, useRef } from "react";
 import './SearchArea.scss';
 
@@ -20,7 +21,7 @@ const SearchArea: React.FC<SearchAreaProps> = ({ isWaiting, onChange, searchTerm
   }, [isWaiting]);
 
   return (
-    <Search size="lg" ref={searchRef} autoFocus className={isWaiting ? 'waiting-input' : ''} onChange={onChange} labelText="Search Stack Overflow" />
+    <Search value={decode(searchTerm)} size="lg" ref={searchRef} autoFocus className={isWaiting ? 'waiting-input' : ''} onChange={onChange} labelText="Search Stack Overflow" />
   )
 }
 
