@@ -1,24 +1,29 @@
-import Axios from "axios";
 import { useCallback, useState } from "react";
 
 const useSearchResults = (searchTerm: string) => {
   const [searchResultsItems, setSearchResultsItems] = useState<any[]>([]);
 
-  const fetchSearchResults = useCallback(() => {
-    Axios.get(
-      `https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&site=stackoverflow&intitle=${searchTerm}`
-    )
-      .then((response) => {
-        if (response.data.items.length > 0) {
-          setSearchResultsItems(response.data.items);
+  const fetchSearchResults = useCallback(
+    async (searchTerm: string) => {
+      try {
+        const response = await fetch(
+          `https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&site=stackoverflow&intitle=${encodeURIComponent(
+            searchTerm
+          )}}`
+        );
+        const data = await response.json();
+
+        if (data.items.length > 0) {
+          setSearchResultsItems(data.items);
         } else {
           setSearchResultsItems([{ title: "noresult" }]);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
-  }, [searchTerm]);
+      }
+    },
+    [searchTerm]
+  );
 
   return { searchResultsItems, fetchSearchResults };
 };

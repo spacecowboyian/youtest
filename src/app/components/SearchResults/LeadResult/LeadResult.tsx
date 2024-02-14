@@ -7,34 +7,37 @@ import "./LeadResult.scss";
 
 interface LeadResultProps {
   item: StackOverflowResult;
-  countdown: number;
 }
 
-const LeadResult: React.FC<LeadResultProps> = ({ countdown, item, ...props }) => {
+const LeadResult: React.FC<LeadResultProps> = ({ item, ...props }) => {
 
-  const [key, setKey] = useState(Math.random());
+  const [key, setKey] = useState(new Date().getTime());
 
   useEffect(() => {
-    setKey(Math.random());
+    setKey(new Date().getTime());
   }, [item]);
 
-  return (
-    item ?
-      item.title !== "noresult" ?
-        <ClickableTile key={key} id="lead-result" href={item.link} >
-          <span className="tile-label">Top Result</span>
-          <h3 className="lead-result-title">{decode(item.title)}</h3>
-          Tags: &nbsp;
-          {item.tags ? item.tags.map(tag => (
-            <Tag key={tag} className="some-class" type="cyan" title="tag">
-              {tag}
-            </Tag>
-          ))
-            : null}
-        </ClickableTile>
-        : <Tile><p>Nope. Try again friend.</p></Tile>
-      : <Tile><p className="center">Start typing your code quandry and when you are done typing, you shall receive the best single stack overflow result I can provide</p></Tile>
-  )
+  let result;
+  console.log(item)
+  if (!item) { result = <Tile><p className="center">Start typing your code quandry and when you are done typing, you shall receive the best single stack overflow result I can provide</p></Tile>; }
+  if (item && item.title !== "noresult") {
+    result = (
+      <ClickableTile key={key} id="lead-result" href={item.link}>
+        <span className="tile-label">Top Result</span>
+        <h3 className="lead-result-title">{decode(item.title)}</h3>
+        Tags: &nbsp;
+        {item.tags ? item.tags.map(tag => (
+          <Tag key={tag} className="some-class" type="cyan" title="tag">
+            {tag}
+          </Tag>
+        )) : null}
+      </ClickableTile>
+    );
+  } else {
+    result = <Tile><p>Nope. Try again friend.</p></Tile>;
+  }
+
+  return result;
 }
 
 export default LeadResult;

@@ -6,24 +6,25 @@ interface RelatedResultsAccordionProps {
 }
 
 const RelatedResultsAccordion: React.FC<RelatedResultsAccordionProps> = ({ items }) => {
+
+  const ResultsAccordionItem = ({ accordionItems, label, open }: {
+    accordionItems: any[]; label: string; open?: boolean
+  }) => {
+    if (accordionItems.length > 0) {
+      return (
+        <AccordionItem open={open} title={`${accordionItems.length} - ${label}`}>
+          <RelatedResultsList items={accordionItems} />
+        </AccordionItem>
+      )
+    }
+  }
+
   return (
-    items.length > 1 &&
+    items.length > 0 &&
     <Accordion>
-      {items.slice(1, 6).length > 1 ?
-        <AccordionItem open title={`${items.slice(1, 6).length} - Directly Related Results`}>
-          <RelatedResultsList items={items.slice(1, 6)} />
-        </AccordionItem>
-        : null}
-      {items.slice(7, 22).length > 1 ?
-        <AccordionItem title={`${items.slice(7, 22).length} - Kinda Related Results`}>
-          <RelatedResultsList items={items.slice(7, 22)} />
-        </AccordionItem>
-        : null}
-      {items.slice(23).length > 1 ?
-        <AccordionItem title={`${items.slice(23).length} - is All That's Left`}>
-          <RelatedResultsList items={items.slice(23)} />
-        </AccordionItem>
-        : null}
+      <ResultsAccordionItem open accordionItems={items.slice(1, 6)} label="Directly Related Results" />
+      <ResultsAccordionItem accordionItems={items.slice(7, 22)} label="Kinda Related Results" />
+      <ResultsAccordionItem accordionItems={items.slice(23)} label="is All That's Left" />
     </Accordion>
   )
 }

@@ -1,3 +1,4 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "airbnb",
+  "react/jsx-max-props-per-line": [1, { "when": "multiline" }]
 }

@@ -5,20 +5,19 @@ import RelatedResultsAccordion from './ReleatedResultsAccordion/RelatedResultsAc
 
 interface SearchResultsProps {
   items: StackOverflowResult[];
-  countdown: number;
 }
 
-const SearchResults: React.FC<SearchResultsProps> = ({ countdown, items }) => {
+const SearchResults: React.FC<SearchResultsProps> = ({ items }) => {
   return (
     <FlexGrid>
       <Row>
         <Column lg={4} md={3} sm={2}>
-          <LeadResult item={items[0]} countdown={countdown} />
+          <LeadResult item={items[0]} />
         </Column>
       </Row>
       <Row>
         <Column lg={4} md={3} sm={2}>
-          {items.length > 1 && <RelatedResultsAccordion items={items} />}
+          {items.length > 0 && <RelatedResultsAccordion items={items} />}
         </Column>
       </Row>
     </FlexGrid>

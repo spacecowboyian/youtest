@@ -7,14 +7,16 @@ interface RelatedResultsListProps {
 }
 
 const RelatedResultsList: React.FC<RelatedResultsListProps> = ({ items }) => {
+
+  if (!items?.length) return null;
+
   return (
     <UnorderedList>
-      {items ? items.map(item => (
+      {items.map(item => (
         <ListItem key={item.question_id}>
           <Link href={item.link}>{decode(item.title)}</Link>
         </ListItem>
-      ))
-        : null}
+      ))}
     </UnorderedList>
   )
 }
