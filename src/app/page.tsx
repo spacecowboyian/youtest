@@ -25,6 +25,7 @@ const SearchInterface = () => {
     const delayDebounceFn = setTimeout(() => {
       if (searchTerm.length > 1) {
         fetchSearchResults();
+        router.push(`/?search=${searchTerm}`);
       }
     }, 1500)
 
@@ -37,7 +38,6 @@ const SearchInterface = () => {
   const handleSearchChange = (event: { target: HTMLInputElement; type: "change"; }) => {
     const newSearchTerm = event.target.value;
     setSearchTerm(newSearchTerm);
-    router.push(`/?search=${newSearchTerm}`);
   }
 
   return (
