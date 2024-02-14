@@ -25,7 +25,7 @@ const SearchInterface = () => {
     const delayDebounceFn = setTimeout(() => {
       if (searchTerm.length > 1) {
         fetchSearchResults();
-        router.replace(`/?search=${searchTerm}`);
+        // router.replace(`/?search=${searchTerm}`);
       }
     }, 1500)
 
