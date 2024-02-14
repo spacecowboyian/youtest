@@ -1,6 +1,6 @@
 'use client'
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import SearchResults from './components/SearchResults/SearchResults';
 import './page.scss';
@@ -9,7 +9,7 @@ import useSearchResults from './services/useSearchResults';
 import { Content, Theme } from '@carbon/react';
 import SearchArea from './components/SearchArea/SearchArea';
 
-export default function Home() {
+const SearchInterface = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
@@ -47,5 +47,13 @@ export default function Home() {
         <SearchResults countdown={countdown} items={searchResultsItems} />
       </Content>
     </Theme>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback="Loading...">
+      <SearchInterface />
+    </Suspense>
   );
 }
