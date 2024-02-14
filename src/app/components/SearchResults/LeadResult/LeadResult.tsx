@@ -33,7 +33,7 @@ const LeadResult: React.FC<LeadResultProps> = ({ countdown, item, ...props }) =>
             : null}
         </ClickableTile>
         : <Tile><p>Nope. Try again friend.</p></Tile>
-      : <Tile><p className="center">Start typing and you shall receive the best stackoverflow result I can provide</p></Tile>
+      : <Tile><p className="center">Start typing your code quandry and when you are done typing, you shall receive the best single stack overflow result I can provide</p></Tile>
   )
 }
 

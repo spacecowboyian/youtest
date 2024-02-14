@@ -38,7 +38,7 @@ export default function Home() {
       if (searchTerm.length > 1) {
         fetchSearchResults();
       }
-    }, 1000)
+    }, 1500)
 
     return () => {
       clearTimeout(delayDebounceFn);
@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <Theme as="main" theme={"g100"}>
-      <SearchArea isWaiting={countdown === 2 && searchTerm.length > 1} onChange={handleSearchChange} />
+      <SearchArea searchTerm={searchTerm} isWaiting={countdown === 1 && searchTerm.length > 1} onChange={handleSearchChange} />
       <Content>
         <SearchResults countdown={countdown} items={searchResultsItems} />
       </Content>

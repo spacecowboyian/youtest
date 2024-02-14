@@ -3,7 +3,7 @@
     background-position: 0% center;
   }
   100% {
-    background-position: -500% center;
+    background-position: -300% center;
     background-color: var(--cds-field);
   }
 }
@@ -15,7 +15,7 @@
     var(--cds-field)
   );
   background-size: 250% auto;
-  animation: loader 5s ease-out;
+  animation: loader 3s ease-out;
 }
 
 .cds--search-input {
