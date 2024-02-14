@@ -1,0 +1,19 @@
+.waiting-input .cds--search-input {
+  background: linear-gradient(
+    to left,
+    var(--cds-ai-aura-hover-start),
+    var(--cds-field)
+  );
+  background-size: 250% auto;
+  animation: loader 5s ease-out;
+}
+
+@keyframes loader {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: -500% center;
+    background-color: var(--cds-field);
+  }
+}

@@ -1,0 +1,11 @@
+@use "@carbon/react";
+@use "@carbon/react/scss/colors";
+@use "@carbon/layout";
+
+body {
+  background-color: black;
+}
+
+.cds--list__item {
+  padding: layout.$spacing-02;
+}
