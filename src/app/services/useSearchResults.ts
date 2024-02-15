@@ -5,21 +5,23 @@ const useSearchResults = (searchTerm: string) => {
 
   const fetchSearchResults = useCallback(
     async (searchTerm: string) => {
-      try {
-        const response = await fetch(
-          `https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&site=stackoverflow&intitle=${encodeURIComponent(
-            searchTerm
-          )}}`
-        );
-        const data = await response.json();
+      if (searchTerm) {
+        try {
+          const response = await fetch(
+            `https://api.stackexchange.com/2.3/search?order=desc&sort=relevance&site=stackoverflow&intitle=${encodeURIComponent(
+              searchTerm
+            )}}`
+          );
+          const data = await response.json();
 
-        if (data.items.length > 0) {
-          setSearchResultsItems(data.items);
-        } else {
-          setSearchResultsItems([{ title: "noresult" }]);
+          if (data.items.length > 0) {
+            setSearchResultsItems(data.items);
+          } else {
+            setSearchResultsItems([{ title: "noresult" }]);
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
       }
     },
     [searchTerm]

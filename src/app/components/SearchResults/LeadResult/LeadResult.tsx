@@ -17,7 +17,6 @@ const LeadResult: React.FC<LeadResultProps> = ({ item, ...props }) => {
   }, [item]);
 
   let result;
-  console.log(item);
   if (!item) {
     result = (
       <Tile>
@@ -43,7 +42,8 @@ const LeadResult: React.FC<LeadResultProps> = ({ item, ...props }) => {
           : null}
       </ClickableTile>
     );
-  } else {
+  }
+  if (item && item.title == "noresult") {
     result = (
       <Tile>
         <p>Nope. Try again friend.</p>

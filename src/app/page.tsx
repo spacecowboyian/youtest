@@ -14,6 +14,7 @@ const SearchInterface = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
+
   const { searchResultsItems, fetchSearchResults } = useSearchResults(searchTerm);
   const [isDoneTyping, setIsDoneTyping] = useState(true);
   const [debounceTimeoutId, setDebounceTimeoutId] = useState(null);
@@ -25,9 +26,7 @@ const SearchInterface = () => {
       setIsDoneTyping(true);
       setTimeout(async () => {
         setIsDoneTyping(false);
-        await fetchSearchResults(newSearchTerm).then((results) => {
-          router.replace(`/?search=${newSearchTerm}`);
-        });
+        await fetchSearchResults(newSearchTerm);
       }, 2000);
     }, 1000),
     []
