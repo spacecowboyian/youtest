@@ -8,6 +8,8 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ items }) => {
+  if (!items?.length) return null;
+
   return (
     <FlexGrid>
       <Row>
@@ -17,11 +19,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ items }) => {
       </Row>
       <Row>
         <Column lg={4} md={3} sm={2}>
-          {items.length > 0 && <RelatedResultsAccordion items={items} />}
+          <RelatedResultsAccordion items={items} />
         </Column>
       </Row>
     </FlexGrid>
-  )
+  );
 }
 
 export default SearchResults;

@@ -1,6 +1,6 @@
 'use client'
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 
 import SearchResults from './components/SearchResults/SearchResults';
 import './page.scss';
@@ -11,14 +11,11 @@ import debounce from 'lodash/debounce';
 import SearchArea from './components/SearchArea/SearchArea';
 
 const SearchInterface = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
 
   const { searchResultsItems, fetchSearchResults } = useSearchResults(searchTerm);
   const [isDoneTyping, setIsDoneTyping] = useState(true);
-  const [debounceTimeoutId, setDebounceTimeoutId] = useState(null);
-  const isFirstRender = useRef(true);
 
 
   const debouncedSearch = useCallback(
@@ -29,7 +26,7 @@ const SearchInterface = () => {
         await fetchSearchResults(newSearchTerm);
       }, 2000);
     }, 1000),
-    []
+    [fetchSearchResults]
   );
 
   useEffect(() => {

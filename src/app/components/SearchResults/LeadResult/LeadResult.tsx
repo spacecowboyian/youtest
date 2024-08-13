@@ -9,16 +9,15 @@ interface LeadResultProps {
   item: StackOverflowResult;
 }
 
-const LeadResult: React.FC<LeadResultProps> = ({ item, ...props }) => {
-  const [key, setKey] = useState(new Date().getTime());
+const LeadResult: React.FC<LeadResultProps> = ({ item }) => {
+  const [key, setKey] = useState(Date.now());
 
   useEffect(() => {
-    setKey(new Date().getTime());
+    setKey(Date.now());
   }, [item]);
 
-  let result;
   if (!item) {
-    result = (
+    return (
       <Tile>
         <p className="center">
           Start typing your code quandry and when you are done typing, you shall
@@ -27,31 +26,23 @@ const LeadResult: React.FC<LeadResultProps> = ({ item, ...props }) => {
       </Tile>
     );
   }
-  if (item && item.title !== "noresult") {
-    result = (
-      <ClickableTile key={key} id="lead-result" href={item.link}>
-        <span className="tile-label">Top Result</span>
-        <h3 className="lead-result-title">{decode(item.title)}</h3>
-        Tags: &nbsp;
-        {item.tags
-          ? item.tags.map((tag) => (
-            <Tag key={tag} className="some-class" type="cyan" title="tag">
-              {tag}
-            </Tag>
-          ))
-          : null}
-      </ClickableTile>
-    );
-  }
-  if (item && item.title == "noresult") {
-    result = (
-      <Tile>
-        <p>Nope. Try again friend.</p>
-      </Tile>
-    );
+
+  if (item.title === "noresult") {
+    return null;
   }
 
-  return result;
+  return (
+    <ClickableTile key={key} id="lead-result" href={item.link}>
+      <span className="tile-label">Top Result</span>
+      <h3 className="lead-result-title">{decode(item.title)}</h3>
+      Tags: &nbsp;
+      {item.tags?.map((tag) => (
+        <Tag key={tag} className="some-class" type="cyan" title="tag">
+          {tag}
+        </Tag>
+      ))}
+    </ClickableTile>
+  );
 };
 
 export default LeadResult;

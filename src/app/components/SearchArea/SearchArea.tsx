@@ -16,14 +16,12 @@ const SearchArea: React.FC<SearchAreaProps> = ({
 }) => {
   const searchRef = useRef<HTMLInputElement | null>(null);
 
-  // console.log('isWaiting', isWaiting);
-
   useEffect(() => {
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     if (isMobile && searchRef.current && !isWaiting && searchTerm !== "") {
       searchRef.current.blur();
     }
-  }, [isWaiting]);
+  }, [isWaiting, searchTerm]);
 
   return (
     <Search

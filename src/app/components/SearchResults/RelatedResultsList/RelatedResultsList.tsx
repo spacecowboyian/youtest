@@ -21,4 +21,4 @@ const RelatedResultsList: React.FC<RelatedResultsListProps> = ({ items }) => {
   )
 }
 
-export default RelatedResultsList
+export default RelatedResultsList;

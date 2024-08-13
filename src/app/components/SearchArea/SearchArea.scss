@@ -3,7 +3,7 @@
     background-position: 0% center;
   }
   100% {
-    background-position: -500% center;
+    background-position: -250% center;
     background-color: var(--cds-field);
   }
 }
@@ -11,11 +11,12 @@
 .waiting-input .cds--search-input {
   background: linear-gradient(
     to left,
-    var(--cds-ai-aura-hover-start),
-    var(--cds-field)
-  );
+    var(--cds-field),
+    var(--cds-ai-aura-hover-start)
+  )
+  no-repeat;
   background-size: 250% auto;
-  animation: loader 10s ease-out;
+  animation: loader 3s ease-out;
 }
 
 .cds--search-input {
